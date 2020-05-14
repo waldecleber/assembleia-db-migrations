@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.com.dbccompany</groupId>
+	<artifactId>db-migrations</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>db-migrations</name>
+	<description>Liquibase migrations for new parus database</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>11</java.version>
+        <dataSource.project.driverClass>com.mysql.cj.jdbc.Driver</dataSource.project.driverClass>
+	</properties>
+
+	<profiles>
+        <profile>
+            <id>localhost</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <dataSource.project.jdbcURL>jdbc:mysql://localhost:3306/votacao_assembleia?createDatabaseIfNotExist=true</dataSource.project.jdbcURL>
+                <dataSource.project.username>root</dataSource.project.username>
+                <dataSource.project.password>admin</dataSource.project.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <dataSource.project.jdbcURL>jdbc:mysql://mysqldb:3306/votacao_assembleia?createDatabaseIfNotExist=true</dataSource.project.jdbcURL>
+                <dataSource.project.username>root</dataSource.project.username>
+                <dataSource.project.password>admin</dataSource.project.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>heroku</id>
+            <properties>
+                <dataSource.project.jdbcURL>jdbc:mysql://b994d85f673f0c:9799755b@us-cdbr-east-06.cleardb.net/heroku_6c23f40f9664b1d?reconnect=true</dataSource.project.jdbcURL>
+                <dataSource.project.username>b994d85f673f0c</dataSource.project.username>
+                <dataSource.project.password>9799755b</dataSource.project.password>
+            </properties>
+        </profile>
+    </profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		 	<version>8.0.19</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+            <version>3.8.0</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.8.0</version>
+				<configuration>
+					<propertyFile>target/classes/liquibase.properties</propertyFile>
+                    <propertyFileWillOverride>true</propertyFileWillOverride>
+				</configuration>                              
+                <executions>
+                    <execution>
+                    <phase>process-resources</phase>                                                                  
+                    <goals>
+                        <goal>update</goal>
+                    </goals>
+                    </execution>
+                </executions>
+			</plugin>            
+		</plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <pluginManagement>
+        	<plugins>
+        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>org.liquibase</groupId>
+        								<artifactId>
+        									liquibase-maven-plugin
+        								</artifactId>
+        								<versionRange>
+        									[3.8.0,)
+        								</versionRange>
+        								<goals>
+        									<goal>update</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+        	</plugins>
+        </pluginManagement>
+	</build>
+
+
+</project>

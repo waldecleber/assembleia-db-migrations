@@ -1,0 +1,36 @@
+databaseChangeLog:    
+  - changeSet:
+      id: create-table-associado-sql
+      context: dev
+      author: waldecleber
+      changes:
+        - sqlFile:
+              encoding: utf8
+              path: sql/create_table_associado.sql
+              relativeToChangelogFile: true
+              splitStatements: true
+              stripComments: true       
+
+  - changeSet:
+      id: create-table-pauta-sql
+      context: dev
+      author: waldecleber
+      changes:
+        - sqlFile:
+              encoding: utf8
+              path: sql/create_table_pauta.sql
+              relativeToChangelogFile: true
+              splitStatements: true
+              stripComments: true  
+              
+  - changeSet:
+      id: create-table-voto-sql
+      context: dev
+      author: waldecleber
+      changes:
+        - sqlFile:
+              encoding: utf8
+              path: sql/create_table_voto.sql
+              relativeToChangelogFile: true
+              splitStatements: true
+              stripComments: true                              

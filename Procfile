@@ -1,0 +1,1 @@
+release: ./mvnw -Dliquibase.changeLogFile=src/main/resources/db.changelog-master.yaml -Dliquibase.url=$dataSource.project.jdbcURL -Dliquibase.promptOnNonLocalDatabase=false liquibase:update
