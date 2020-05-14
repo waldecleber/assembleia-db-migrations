@@ -16,4 +16,4 @@ CREATE TABLE IF NOT EXISTS voto (
 	alter table voto 
        add constraint fk_voto_pauta 
        foreign key (id_pauta) 
-       references pauta (id)       
+       references pauta (id);  
