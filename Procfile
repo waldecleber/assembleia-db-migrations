@@ -1,1 +1,1 @@
-release: ./mvnw -Dliquibase.changeLogFile=src/main/resources/db.changelog-master.yaml -Dliquibase.url=$dataSource.project.jdbcURL -Dliquibase.promptOnNonLocalDatabase=false liquibase:update
+release: ./mvnw -Dliquibase.changeLogFile=src/main/resources/db.changelog-master.yaml -Dliquibase.url=jdbc:mysql://b994d85f673f0c:9799755b@us-cdbr-east-06.cleardb.net/heroku_6c23f40f9664b1d?reconnect=true -Dliquibase.promptOnNonLocalDatabase=false liquibase:update
