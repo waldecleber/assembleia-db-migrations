@@ -1,7 +1,7 @@
 
 CREATE TABLE IF NOT EXISTS voto (
        id bigint not null auto_increment,
-        data_voto datetime(6),
+        data_voto datetime,
         resposta bit,
         id_associado bigint,
         id_pauta bigint,
